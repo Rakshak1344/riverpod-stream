@@ -17,9 +17,9 @@ abstract class NetworkTaskRepository {
   factory NetworkTaskRepository(Dio dio, {String baseUrl}) =
       _NetworkTaskRepository;
 
-  @GET('/tasks/:id')
-  Future<ObjectResponse<Task>> fetchTaskById(@Path('id') int id);
+  @GET('/todos')
+  Future<List<Task>> fetchTasks();
 
-  @GET('/tasks')
-  Future<CollectionResponse<Task>> fetchTasks();
+  @GET('/todos')
+  Future<ObjectResponse<Task>> fetchTaskById(@Path('id') int id);
 }

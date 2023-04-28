@@ -18,10 +18,22 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: buildTitle(),
+        actions: [buildDeleteAllButton()],
+      ),
       body: buildBody(),
       floatingActionButton: buildAddTaskFloatingActionButton(),
     );
+  }
+
+  Widget buildTitle() {
+    return ref.watch(tasksStateProvider).when(
+        data: (data) {
+          return Text(data.length.toString());
+        },
+        error: (e, s) => Text(e.toString()),
+        loading: () => const Text("Loading"));
   }
 
   Widget buildAddTaskFloatingActionButton() {
@@ -33,11 +45,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   }
 
   Widget buildBody() {
-    return ref.watch(tasksStateProvider).when(
-          data: buildTaskList,
-          loading: () => const CircularProgressIndicator(),
-          error: (e, s) => Text(e.toString()),
-        );
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      child: ref.watch(tasksStateProvider).when(
+            data: buildTaskList,
+            loading: () => const CircularProgressIndicator(),
+            error: (e, s) => Text(e.toString()),
+          ),
+    );
+  }
+
+  Future<void> onRefresh() async {
+    ref.read(tasksStateProvider.notifier).fetchTasks();
   }
 
   Widget buildTaskList(List<Task> tasks) {
@@ -56,9 +75,26 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   }
 
   Widget buildListTile(Task? task) {
-    return ListTile(
-      title: Text(task!.name),
-      subtitle: Text(task.description),
+    return Visibility(
+      visible: task != null,
+      child: Dismissible(
+        key: UniqueKey(),
+        onDismissed: (direction) {
+          if (DismissDirection.endToStart == direction) {
+            ref.read(tasksStateProvider.notifier).deleteTask(task.id);
+          }
+        },
+        child: ListTile(
+          title: Text(task!.title),
+          subtitle: Text(task.completed.toString()),
+        ),
+      ),
+    );
+  }
+
+  Widget buildDeleteAllButton() {
+    return CloseButton(
+      onPressed: () => ref.read(tasksStateProvider.notifier).deleteAllTasks(),
     );
   }
 }

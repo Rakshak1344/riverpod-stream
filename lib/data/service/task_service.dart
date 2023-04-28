@@ -22,22 +22,27 @@ class TaskService {
   Stream<List<Task>> watchAllTasks() {
     refreshTasks();
 
-    return _localTaskRepository.getAllTasks();
+    return _localTaskRepository.watchAllTasks();
   }
 
   Stream<Task?> watchTaskById(int id) async* {
     var res = await _networkTaskRepository.fetchTaskById(id);
     _localTaskRepository.saveTasks([res.data]);
 
-    yield* _localTaskRepository.getTaskById(id);
+    yield* _localTaskRepository.watchTask(id);
   }
 
   void deleteTask(int id) {
+    // TODO: implement network delete
     _localTaskRepository.removeTask(id);
   }
 
   void refreshTasks() async {
     var res = await _networkTaskRepository.fetchTasks();
-    _localTaskRepository.saveTasks(res.data);
+    _localTaskRepository.saveTasks(res);
+  }
+
+  void deleteAllTasks() {
+    _localTaskRepository.deleteAllTasks();
   }
 }

@@ -10,9 +10,9 @@ part 'task_model.g.dart';
 class Task with _$Task {
   const factory Task({
     @HiveField(0) required int id,
-    @HiveField(1) required String name,
-    @HiveField(2) required String description,
-    @HiveField(3) required bool isCompleted,
+    @HiveField(1) required int userId,
+    @HiveField(2) required String title,
+    @HiveField(3) required bool completed,
   }) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);

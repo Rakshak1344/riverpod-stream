@@ -23,11 +23,11 @@ mixin _$Task {
   @HiveField(0)
   int get id => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get name => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
   @HiveField(2)
-  String get description => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   @HiveField(3)
-  bool get isCompleted => throw _privateConstructorUsedError;
+  bool get completed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +41,9 @@ abstract class $TaskCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) int id,
-      @HiveField(1) String name,
-      @HiveField(2) String description,
-      @HiveField(3) bool isCompleted});
+      @HiveField(1) int userId,
+      @HiveField(2) String title,
+      @HiveField(3) bool completed});
 }
 
 /// @nodoc
@@ -60,26 +60,26 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? isCompleted = null,
+    Object? userId = null,
+    Object? title = null,
+    Object? completed = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
+      completed: null == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -93,9 +93,9 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) int id,
-      @HiveField(1) String name,
-      @HiveField(2) String description,
-      @HiveField(3) bool isCompleted});
+      @HiveField(1) int userId,
+      @HiveField(2) String title,
+      @HiveField(3) bool completed});
 }
 
 /// @nodoc
@@ -108,26 +108,26 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? isCompleted = null,
+    Object? userId = null,
+    Object? title = null,
+    Object? completed = null,
   }) {
     return _then(_$_Task(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      isCompleted: null == isCompleted
-          ? _value.isCompleted
-          : isCompleted // ignore: cast_nullable_to_non_nullable
+      completed: null == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -138,9 +138,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
 class _$_Task implements _Task {
   const _$_Task(
       {@HiveField(0) required this.id,
-      @HiveField(1) required this.name,
-      @HiveField(2) required this.description,
-      @HiveField(3) required this.isCompleted});
+      @HiveField(1) required this.userId,
+      @HiveField(2) required this.title,
+      @HiveField(3) required this.completed});
 
   factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
 
@@ -149,17 +149,17 @@ class _$_Task implements _Task {
   final int id;
   @override
   @HiveField(1)
-  final String name;
+  final int userId;
   @override
   @HiveField(2)
-  final String description;
+  final String title;
   @override
   @HiveField(3)
-  final bool isCompleted;
+  final bool completed;
 
   @override
   String toString() {
-    return 'Task(id: $id, name: $name, description: $description, isCompleted: $isCompleted)';
+    return 'Task(id: $id, userId: $userId, title: $title, completed: $completed)';
   }
 
   @override
@@ -168,17 +168,15 @@ class _$_Task implements _Task {
         (other.runtimeType == runtimeType &&
             other is _$_Task &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.completed, completed) ||
+                other.completed == completed));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, description, isCompleted);
+  int get hashCode => Object.hash(runtimeType, id, userId, title, completed);
 
   @JsonKey(ignore: true)
   @override
@@ -197,9 +195,9 @@ class _$_Task implements _Task {
 abstract class _Task implements Task {
   const factory _Task(
       {@HiveField(0) required final int id,
-      @HiveField(1) required final String name,
-      @HiveField(2) required final String description,
-      @HiveField(3) required final bool isCompleted}) = _$_Task;
+      @HiveField(1) required final int userId,
+      @HiveField(2) required final String title,
+      @HiveField(3) required final bool completed}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
@@ -208,13 +206,13 @@ abstract class _Task implements Task {
   int get id;
   @override
   @HiveField(1)
-  String get name;
+  int get userId;
   @override
   @HiveField(2)
-  String get description;
+  String get title;
   @override
   @HiveField(3)
-  bool get isCompleted;
+  bool get completed;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;

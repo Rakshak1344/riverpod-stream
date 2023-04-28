@@ -18,9 +18,9 @@ class TaskAdapter extends TypeAdapter<Task> {
     };
     return Task(
       id: fields[0] as int,
-      name: fields[1] as String,
-      description: fields[2] as String,
-      isCompleted: fields[3] as bool,
+      userId: fields[1] as int,
+      title: fields[2] as String,
+      completed: fields[3] as bool,
     );
   }
 
@@ -31,11 +31,11 @@ class TaskAdapter extends TypeAdapter<Task> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.userId)
       ..writeByte(2)
-      ..write(obj.description)
+      ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.isCompleted);
+      ..write(obj.completed);
   }
 
   @override
@@ -55,14 +55,14 @@ class TaskAdapter extends TypeAdapter<Task> {
 
 _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
       id: json['id'] as int,
-      name: json['name'] as String,
-      description: json['description'] as String,
-      isCompleted: json['isCompleted'] as bool,
+      userId: json['userId'] as int,
+      title: json['title'] as String,
+      completed: json['completed'] as bool,
     );
 
 Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'isCompleted': instance.isCompleted,
+      'userId': instance.userId,
+      'title': instance.title,
+      'completed': instance.completed,
     };

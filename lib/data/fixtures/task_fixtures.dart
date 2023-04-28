@@ -11,9 +11,9 @@ class _TaskFixtureFactory extends FixtureFactory<Task> {
     return define(
       (faker) => Task(
         id: faker.randomGenerator.integer(100),
-        name: faker.randomGenerator.string(18),
-        description: faker.lorem.sentence(),
-        isCompleted: faker.randomGenerator.boolean(),
+        userId: faker.randomGenerator.integer(100),
+        completed: faker.randomGenerator.boolean(),
+        title: faker.randomGenerator.string(10),
       ),
     );
   }

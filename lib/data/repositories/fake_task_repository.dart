@@ -5,9 +5,9 @@ import 'package:riverpodstream/data/repositories/network_task_repository.dart';
 
 class FakeTaskRepository implements NetworkTaskRepository {
   @override
-  Future<CollectionResponse<Task>> fetchTasks() async {
+  Future<List<Task>> fetchTasks() async {
     var task = TaskFixture.factory().makeMany(2);
-    return CollectionResponse<Task>(task);
+    return task;
   }
 
   @override

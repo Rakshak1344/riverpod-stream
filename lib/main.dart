@@ -11,13 +11,12 @@ void main() async {
   await AppConfig.initHive();
 
   runApp(
-    ProviderScope(
-      overrides: [
-        networkTaskRepositoryProvider.overrideWith(
-          (ref) => FakeTaskRepository(),
-        ),
-      ],
-      child: const MyApp(),
+    const ProviderScope(
+      // overrides: [
+      //   networkTaskRepositoryProvider
+      //       .overrideWith((ref) => FakeTaskRepository(),),
+      // ],
+      child: MyApp(),
     ),
   );
 }

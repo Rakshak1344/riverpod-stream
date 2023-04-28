@@ -15,6 +15,18 @@ class TasksState extends _$TasksState {
 
   void fetchTasks() async {
     state = const AsyncValue<List<Task>>.loading();
-    ref.read(taskServiceProvider).refreshTasks();
+    await Future.delayed(const Duration(seconds: 2));
+    ref.read(taskServiceProvider).watchAllTasks();
+  }
+
+  void deleteTask(int id) {
+    state = const AsyncValue<List<Task>>.loading();
+    ref.read(taskServiceProvider).deleteTask(id);
+    // ref.watch(taskServiceProvider).watchAllTasks();
+  }
+
+  void deleteAllTasks() {
+    state = const AsyncValue<List<Task>>.loading();
+    ref.read(taskServiceProvider).deleteAllTasks();
   }
 }
